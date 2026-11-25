@@ -1011,24 +1011,18 @@ end subroutine update_radius
       
       if (perimeter < 2.0_dp) then 
          k = 2.0_dp
-         ASM = 0.009344704_dp !E-cig ABM
-         ! ASM = 0.01_dp !Fatal Asthma val
-         ! ASM = 0.005_dp !Non Fatal Asthma Val 
+         ASM = 0.009344704_dp !E-cig ABM, CHANGE FOR DIFF CASE 
+     
       else if (perimeter < 4.0_dp) then 
          k = 18.0_dp
-         ASM = 0.009344704_dp !E-cig ABM
-         ! ASM = 0.01_dp !Fatal Asthma val
-         ! ASM = 0.005_dp !Non Fatal Asthma Val 
+         ASM = 0.009344704_dp !E-cig ABM,  CHANGE FOR DIFF CASE 
+      
       else if (perimeter <= 10.0_dp) then 
          k = 36.0_dp
-         ASM = 0.009344704_dp !E-cig ABM
-         ! ASM = 0.044_dp !Fatal Asthma val
-         ! ASM = 0.005_dp !Non Fatal Asthma Val 
+         ASM = 0.009344704_dp !E-cig ABM,  CHANGE FOR DIFF CASE 
       else 
          k = 22.22_dp
-         ASM = 3.6_dp * 0.009344704_dp ! Scale contribuation for larger airways based on James et al. 
-         ! ASM = 0.046_dp !Fatal Asthma val
-         ! ASM = 0.018!Non Fatal Asthma Val 
+         ASM = 3.6_dp * 0.009344704_dp ! Scale contribuation for larger airways based on James et al.  CHANGE FOR DIFF CASE 
       endif  
       
       h_new = h + k*ASM
@@ -1041,11 +1035,7 @@ end subroutine update_radius
       init_radii(ne) = init_radii(ne) - 0.5*h_new ! Removes the extra tissue from inner radius by n_f 50% for later calcs
       
       ! k_2 = 0.2_dp ! Constant that scales individual cell contribution to overall E
-      E_new = youngs_modulus + k_2*83.0_dp*0.001875_dp ! =  E_old + fibroblast_increase * E_per_fibroblast
-      ! alpha_f(ne) = ((3.0_dp*r_0)/(4.0_dp*h))*((1/E_new)-(1/youngs_modulus))
-      ! if (alpha_f(ne) > 1.0_dp) then
-      !    print *, 'Comp is greater than 1:', ne
-      ! endif
+      E_new = youngs_modulus + k_2*83.0_dp*0.001875_dp ! =  E_old + fibroblast_increase * E_per_fibroblast,  CHANGE FOR DIFF CASE 
       alpha_f(ne) = ((3.0_dp*r_0)/(4.0_dp*h_new*E_new))
 
     enddo
